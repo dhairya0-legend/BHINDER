@@ -26,21 +26,18 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     }
 
-    /* Larger images on the character selection screen */
     .choose-card .profile-image {
       width: 120px;
       height: 120px;
       border-radius: 28px;
     }
 
-    /* Images on the welcome screen */
     .preview-grid .profile-image {
       width: 90px;
       height: 90px;
       border-radius: 22px;
     }
 
-    /* Keep images looking good on mobile */
     @media (max-width: 600px) {
       .choose-card .profile-image {
         width: 100px;
@@ -136,34 +133,13 @@
         aria-label="Fictional adult anime characters"
       >
 
-        <!-- RIYA -->
-
-        <article class="character-card">
-
-          <img
-            class="avatar profile-image"
-            src="RIYA.jpg"
-            alt="Riya fictional character"
-          />
-
-          <strong>
-            Riya
-          </strong>
-
-          <span>
-            Chaos specialist
-          </span>
-
-        </article>
-
-
         <!-- MIKA -->
 
         <article class="character-card">
 
           <img
             class="avatar profile-image"
-            src="MIKA.jpg"
+            src="assets/mika.png"
             alt="Mika fictional character"
           />
 
@@ -172,49 +148,70 @@
           </strong>
 
           <span>
-            Professional roaster
+            Quiet loyal guardian
           </span>
 
         </article>
 
 
-        <!-- YUNA -->
+        <!-- SHIORI -->
 
         <article class="character-card">
 
           <img
             class="avatar profile-image"
-            src="YUNA.jpg"
-            alt="Yuna fictional character"
+            src="assets/shiori.png"
+            alt="Shiori fictional character"
           />
 
           <strong>
-            Yuna
+            Shiori
           </strong>
 
           <span>
-            Too cool to care
+            Graceful, playful and intelligent
           </span>
 
         </article>
 
 
-        <!-- REI -->
+        <!-- MINA -->
 
         <article class="character-card">
 
           <img
             class="avatar profile-image"
-            src="REI.jpg"
-            alt="Rei fictional character"
+            src="assets/mina.png"
+            alt="Mina fictional character"
           />
 
           <strong>
-            Rei
+            Mina
           </strong>
 
           <span>
-            Quietly judging you
+            Energetic otaku
+          </span>
+
+        </article>
+
+
+        <!-- MAKIMA -->
+
+        <article class="character-card">
+
+          <img
+            class="avatar profile-image"
+            src="assets/makima.png"
+            alt="Makima fictional character"
+          />
+
+          <strong>
+            Makima
+          </strong>
+
+          <span>
+            Calm anime authority
           </span>
 
         </article>
@@ -308,39 +305,6 @@
 
 
         <!-- =====================================
-             RIYA
-             ===================================== -->
-
-        <button
-          class="character-card choose-card"
-          type="button"
-          data-name="Riya"
-          data-vibe="Chaos specialist"
-          data-emoji="🌸"
-        >
-
-          <img
-            class="avatar profile-image"
-            src="RIYA.jpg"
-            alt="Riya fictional character"
-          />
-
-          <strong>
-            Riya
-          </strong>
-
-          <span>
-            Chaos specialist
-          </span>
-
-          <small>
-            “I flirt by questioning your life choices.”
-          </small>
-
-        </button>
-
-
-        <!-- =====================================
              MIKA
              ===================================== -->
 
@@ -348,13 +312,14 @@
           class="character-card choose-card"
           type="button"
           data-name="Mika"
-          data-vibe="Professional roaster"
+          data-vibe="Quiet loyal guardian"
+          data-image="assets/mika.png"
           data-emoji="💙"
         >
 
           <img
             class="avatar profile-image"
-            src="MIKA.jpg"
+            src="assets/mika.png"
             alt="Mika fictional character"
           />
 
@@ -363,77 +328,113 @@
           </strong>
 
           <span>
-            Professional roaster
+            Quiet loyal guardian
           </span>
 
           <small>
-            “Your confidence is… unexpectedly brave.”
+            “Calm, disciplined, and not easily impressed.”
           </small>
 
         </button>
 
 
         <!-- =====================================
-             YUNA
+             SHIORI
              ===================================== -->
 
         <button
           class="character-card choose-card"
           type="button"
-          data-name="Yuna"
-          data-vibe="Too cool to care"
+          data-name="Shiori"
+          data-vibe="Graceful, playful and intelligent"
+          data-image="assets/shiori.png"
+          data-emoji="🌸"
+        >
+
+          <img
+            class="avatar profile-image"
+            src="assets/shiori.png"
+            alt="Shiori fictional character"
+          />
+
+          <strong>
+            Shiori
+          </strong>
+
+          <span>
+            Graceful, playful and intelligent
+          </span>
+
+          <small>
+            “She'll probably tease you before helping you.”
+          </small>
+
+        </button>
+
+
+        <!-- =====================================
+             MINA
+             ===================================== -->
+
+        <button
+          class="character-card choose-card"
+          type="button"
+          data-name="Mina"
+          data-vibe="Energetic otaku"
+          data-image="assets/mina.png"
           data-emoji="✨"
         >
 
           <img
             class="avatar profile-image"
-            src="YUNA.jpg"
-            alt="Yuna fictional character"
+            src="assets/mina.png"
+            alt="Mina fictional character"
           />
 
           <strong>
-            Yuna
+            Mina
           </strong>
 
           <span>
-            Too cool to care
+            Energetic otaku
           </span>
 
           <small>
-            “Impress me. Actually, never mind.”
+            “WAIT—YOU LIKE ANIME TOO?! NO WAY!”
           </small>
 
         </button>
 
 
         <!-- =====================================
-             REI
+             MAKIMA
              ===================================== -->
 
         <button
           class="character-card choose-card"
           type="button"
-          data-name="Rei"
-          data-vibe="Quietly judging you"
-          data-emoji="🌙"
+          data-name="Makima"
+          data-vibe="Calm anime authority"
+          data-image="assets/makima.png"
+          data-emoji="🔴"
         >
 
           <img
             class="avatar profile-image"
-            src="REI.jpg"
-            alt="Rei fictional character"
+            src="assets/makima.png"
+            alt="Makima fictional character"
           />
 
           <strong>
-            Rei
+            Makima
           </strong>
 
           <span>
-            Quietly judging you
+            Calm anime authority
           </span>
 
           <small>
-            “I can hear your awkwardness through the screen.”
+            “Interesting. Go on.”
           </small>
 
         </button>
@@ -472,18 +473,18 @@
             class="chat-avatar"
             id="chatAvatar"
           >
-            🌸
+            💙
           </div>
 
 
           <div class="chat-person">
 
             <h1 id="chatTitle">
-              Riya
+              Mika
             </h1>
 
             <span id="chatVibe">
-              Chaos specialist · fictional
+              Quiet loyal guardian · fictional
             </span>
 
           </div>
@@ -538,9 +539,11 @@
             aria-label="Send message"
           >
             Send
+
             <span aria-hidden="true">
               ➤
             </span>
+
           </button>
 
         </form>
