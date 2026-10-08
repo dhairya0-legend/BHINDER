@@ -7,10 +7,14 @@ const screenIds = [
 ];
 
 const characters = document.querySelectorAll('.choose-card');
+
 const messages = document.getElementById('messages');
-const messageInput = document.getElementById('messageInput');
+
+const messageInput =
+  document.getElementById('messageInput');
 
 let currentCharacter = 'Riya';
+
 let conversationHistory = [];
 
 
@@ -19,12 +23,23 @@ let conversationHistory = [];
 // =========================
 
 function showScreen(screenId) {
+
   screenIds.forEach((id) => {
-    const screen = document.getElementById(id);
+
+    const screen =
+      document.getElementById(id);
+
+    if (!screen) return;
+
     const active = id === screenId;
 
     screen.hidden = !active;
-    screen.classList.toggle('active', active);
+
+    screen.classList.toggle(
+      'active',
+      active
+    );
+
   });
 
   window.scrollTo({
@@ -35,32 +50,41 @@ function showScreen(screenId) {
 
 
 // =========================
-// ADD MESSAGE TO CHAT
+// ADD MESSAGE
 // =========================
 
 function addMessage(text, sender) {
-  const bubble = document.createElement('div');
 
-  bubble.className = `message ${sender}`;
+  const bubble =
+    document.createElement('div');
 
-  const label = document.createElement('span');
+  bubble.className =
+    `message ${sender}`;
 
-  label.className = 'message-label';
+  const label =
+    document.createElement('span');
+
+  label.className =
+    'message-label';
 
   label.textContent =
     sender === 'bot'
       ? currentCharacter
       : 'You';
 
-  const body = document.createElement('span');
+  const body =
+    document.createElement('span');
 
   body.textContent = text;
 
-  bubble.append(label, body);
+  bubble.appendChild(label);
+
+  bubble.appendChild(body);
 
   messages.appendChild(bubble);
 
-  messages.scrollTop = messages.scrollHeight;
+  messages.scrollTop =
+    messages.scrollHeight;
 }
 
 
@@ -70,27 +94,36 @@ function addMessage(text, sender) {
 
 let ageConfirmed = false;
 
-document.getElementById('enterButton').addEventListener('click', () => {
+document
+  .getElementById('enterButton')
+  .addEventListener('click', () => {
 
-  if (!ageConfirmed) {
+    if (!ageConfirmed) {
 
-    ageConfirmed = true;
+      ageConfirmed = true;
 
-    document.getElementById('gateNote').hidden = false;
+      const gateNote =
+        document.getElementById('gateNote');
 
-    document.getElementById('enterButton').textContent =
-      'Continue — I’m 18+';
+      gateNote.hidden = false;
 
-    return;
-  }
+      document
+        .getElementById('enterButton')
+        .textContent =
+        'Continue — I’m 18+';
 
-  showScreen('loadingScreen');
+      return;
+    }
 
-  window.setTimeout(() => {
-    showScreen('chooseScreen');
-  }, 1500);
+    showScreen('loadingScreen');
 
-});
+    setTimeout(() => {
+
+      showScreen('chooseScreen');
+
+    }, 1000);
+
+  });
 
 
 // =========================
@@ -101,26 +134,61 @@ characters.forEach((card) => {
 
   card.addEventListener('click', () => {
 
-    currentCharacter = card.dataset.name;
+    currentCharacter =
+      card.dataset.name;
 
-    // Start a completely new conversation
     conversationHistory = [];
 
-    document.getElementById('chatTitle').textContent =
-      currentCharacter;
+    const name =
+      card.dataset.name;
 
-    document.getElementById('chatVibe').textContent =
-      `${card.dataset.vibe} · fictional`;
+    const vibe =
+      card.dataset.vibe;
 
-    document.getElementById('chatAvatar').textContent =
-      card.dataset.emoji;
+    const image =
+      card.dataset.image;
+
+
+    // Update chat name
+
+    document
+      .getElementById('chatTitle')
+      .textContent = name;
+
+
+    // Update vibe
+
+    document
+      .getElementById('chatVibe')
+      .textContent =
+      `${vibe} · fictional`;
+
+
+    // Update profile picture
+
+    const chatAvatar =
+      document.getElementById('chatAvatar');
+
+    chatAvatar.src = image;
+
+    chatAvatar.alt =
+      `${name} profile picture`;
+
+
+    // Clear old messages
 
     messages.replaceChildren();
 
+
+    // Opening message
+
     addMessage(
-      `Oh, hi. I’m ${currentCharacter}. So, what makes you think you can keep up with me?`,
+      `Oh, hi. I’m ${name}. So, what makes you think you can keep up with me?`,
       'bot'
     );
+
+
+    // Open chat
 
     showScreen('chatScreen');
 
@@ -135,141 +203,193 @@ characters.forEach((card) => {
 // AI CHAT
 // =========================
 
-document.getElementById('chatForm').addEventListener('submit', async (event) => {
+document
+  .getElementById('chatForm')
+  .addEventListener(
+    'submit',
+    async (event) => {
 
-  event.preventDefault();
+      event.preventDefault();
 
-  const text = messageInput.value.trim();
+      const text =
+        messageInput.value.trim();
 
-  if (!text) return;
-
-
-  // Show user's message
-  addMessage(text, 'user');
-
-  messageInput.value = '';
-
-  messageInput.disabled = true;
+      if (!text) return;
 
 
-  // Typing indicator
-  const typing = document.createElement('div');
+      // Display user's message
 
-  typing.className = 'message bot';
-
-  typing.textContent =
-    `${currentCharacter} is typing...`;
-
-  messages.appendChild(typing);
-
-  messages.scrollTop = messages.scrollHeight;
-
-
-  try {
-
-    // Send message to Cloudflare Worker
-    const response = await fetch(
-      'https://floral-base-a99fbhinder-ai.him-writess.workers.dev/chat',
-      {
-        method: 'POST',
-
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
-        body: JSON.stringify({
-
-          character: currentCharacter,
-
-          message: text,
-
-          history: conversationHistory
-
-        })
-      }
-    );
-
-
-    const data = await response.json();
-
-
-    // Remove typing indicator
-    typing.remove();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error || 'AI request failed'
+      addMessage(
+        text,
+        'user'
       );
 
+      messageInput.value = '';
+
+      messageInput.disabled = true;
+
+
+      // Typing indicator
+
+      const typing =
+        document.createElement('div');
+
+      typing.className =
+        'message bot';
+
+      typing.textContent =
+        `${currentCharacter} is typing...`;
+
+      messages.appendChild(typing);
+
+      messages.scrollTop =
+        messages.scrollHeight;
+
+
+      try {
+
+        const response =
+          await fetch(
+            'https://floral-base-a99fbhinder-ai.him-writess.workers.dev/chat',
+            {
+              method: 'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/json'
+              },
+
+              body: JSON.stringify({
+
+                character:
+                  currentCharacter,
+
+                message:
+                  text,
+
+                history:
+                  conversationHistory
+
+              })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        // Remove typing indicator
+
+        typing.remove();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            'AI request failed'
+          );
+
+        }
+
+
+        // Display response
+
+        addMessage(
+          data.reply,
+          'bot'
+        );
+
+
+        // Save conversation
+
+        conversationHistory.push({
+
+          role: 'user',
+
+          content: text
+
+        });
+
+
+        conversationHistory.push({
+
+          role: 'assistant',
+
+          content: data.reply
+
+        });
+
+
+      } catch (error) {
+
+        console.error(
+          'AI ERROR:',
+          error
+        );
+
+        typing.remove();
+
+
+        addMessage(
+          'Oops 😭 Something went wrong. Try again.',
+          'bot'
+        );
+
+      } finally {
+
+        messageInput.disabled =
+          false;
+
+        messageInput.focus();
+
+      }
+
     }
-
-
-    // Display AI response
-    addMessage(data.reply, 'bot');
-
-
-    // Save conversation
-    conversationHistory.push({
-      role: 'user',
-      content: text
-    });
-
-    conversationHistory.push({
-      role: 'assistant',
-      content: data.reply
-    });
-
-
-  } catch (error) {
-
-    console.error('AI ERROR:', error);
-
-    typing.remove();
-
-    addMessage(
-      'Oops 😭 Something went wrong. Try again.',
-      'bot'
-    );
-
-  } finally {
-
-    messageInput.disabled = false;
-
-    messageInput.focus();
-
-  }
-
-});
+  );
 
 
 // =========================
-// NAVIGATION
+// BACK BUTTON
 // =========================
 
 document
   .getElementById('backButton')
   .addEventListener('click', () => {
 
-    showScreen('chooseScreen');
+    showScreen(
+      'chooseScreen'
+    );
 
   });
 
+
+// =========================
+// END CHAT
+// =========================
 
 document
   .getElementById('endButton')
   .addEventListener('click', () => {
 
-    showScreen('finishScreen');
+    showScreen(
+      'finishScreen'
+    );
 
   });
 
+
+// =========================
+// RESTART
+// =========================
 
 document
   .getElementById('restartButton')
   .addEventListener('click', () => {
 
-    showScreen('chooseScreen');
+    showScreen(
+      'chooseScreen'
+    );
 
-  }); 
+  });
