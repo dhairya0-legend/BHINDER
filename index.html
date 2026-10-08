@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#17111f" />
+    <title>Tinder Ka Bhai Bhinder</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Bhinder home"><span class="brand-icon">♡</span> BHINDER<span class="brand-tag">TINDER KA BHAI</span></a>
+        <span class="top-note">18+ FICTIONAL FUN ONLY</span>
+      </header>
+
+      <section class="screen active" id="welcomeScreen" aria-labelledby="welcomeTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">Welcome to your questionable decisions club</p>
+          <h1 id="welcomeTitle">CHOTI BAACHI HO KYA?<br /><span>TO IS APP KO USE MAT KARO.</span></h1>
+          <p class="intro">Only for adults 18+. Meet fictional anime characters, get roasted, and have a laugh. No real dating, no real AI—just playful chat.</p>
+          <button class="button button-primary" id="enterButton">I’m 18 or older — let me in <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="character-grid preview-grid" aria-label="Fictional adult anime characters">
+          <article class="character-card"><div class="avatar avatar-pink" aria-hidden="true">🌸</div><strong>Riya</strong><span>Chaos specialist</span></article>
+          <article class="character-card"><div class="avatar avatar-blue" aria-hidden="true">💙</div><strong>Mika</strong><span>Professional roaster</span></article>
+          <article class="character-card"><div class="avatar avatar-gold" aria-hidden="true">✨</div><strong>Yuna</strong><span>Too cool to care</span></article>
+          <article class="character-card"><div class="avatar avatar-violet" aria-hidden="true">🌙</div><strong>Rei</strong><span>Quietly judging you</span></article>
+        </div>
+        <p class="gate-note" id="gateNote" role="status" hidden>This app is for adults 18+ only. Please leave if you’re under 18.</p>
+      </section>
+
+      <section class="screen" id="loadingScreen" aria-live="polite" hidden>
+        <div class="loader-heart" aria-hidden="true">♡</div>
+        <p class="eyebrow">Connection status: desperate</p>
+        <h1>OHOO! RAHA NAHI JATA,<br /><span>TADAP HI AESI HAI.</span></h1>
+        <p class="intro">Aapke fictional options ko thoda sa ready kar rahe hain…</p>
+        <div class="loading-bar"><span></span></div>
+      </section>
+
+      <section class="screen choose-screen" id="chooseScreen" aria-labelledby="chooseTitle" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">All characters are fictional adults</p>
+          <h1 id="chooseTitle">Pick your roast.</h1>
+          <p class="intro">Choose a vibe. Your self-esteem has been warned. 😌</p>
+        </div>
+        <div class="character-grid chooser-grid">
+          <button class="character-card choose-card" data-name="Riya" data-vibe="Chaos specialist" data-emoji="🌸"><span class="avatar avatar-pink">🌸</span><strong>Riya</strong><span>Chaos specialist</span><small>“I flirt by questioning your life choices.”</small></button>
+          <button class="character-card choose-card" data-name="Mika" data-vibe="Professional roaster" data-emoji="💙"><span class="avatar avatar-blue">💙</span><strong>Mika</strong><span>Professional roaster</span><small>“Your confidence is… unexpectedly brave.”</small></button>
+          <button class="character-card choose-card" data-name="Yuna" data-vibe="Too cool to care" data-emoji="✨"><span class="avatar avatar-gold">✨</span><strong>Yuna</strong><span>Too cool to care</span><small>“Impress me. Actually, never mind.”</small></button>
+          <button class="character-card choose-card" data-name="Rei" data-vibe="Quietly judging you" data-emoji="🌙"><span class="avatar avatar-violet">🌙</span><strong>Rei</strong><span>Quietly judging you</span><small>“I can hear your awkwardness through the screen.”</small></button>
+        </div>
+      </section>
+
+      <section class="screen chat-screen" id="chatScreen" aria-labelledby="chatTitle" hidden>
+        <div class="chat-panel">
+          <header class="chat-header">
+            <button class="back-button" id="backButton" aria-label="Choose another character">←</button>
+            <div class="chat-avatar" id="chatAvatar">🌸</div>
+            <div class="chat-person"><h1 id="chatTitle">Riya</h1><span id="chatVibe">Chaos specialist · fictional</span></div>
+            <button class="button button-end" id="endButton">End chat</button>
+          </header>
+          <div class="messages" id="messages" aria-live="polite" aria-label="Chat messages"></div>
+          <form class="chat-form" id="chatForm">
+            <label class="visually-hidden" for="messageInput">Your message</label>
+            <input id="messageInput" type="text" maxlength="240" placeholder="Say something (try not to embarrass yourself)…" autocomplete="off" />
+            <button class="button button-primary send-button" type="submit" aria-label="Send message">Send <span aria-hidden="true">➤</span></button>
+          </form>
+          <p class="chat-disclaimer">Local demo replies · fictional character · not a real person or AI</p>
+        </div>
+      </section>
+
+      <section class="screen finish-screen" id="finishScreen" aria-labelledby="finishTitle" hidden>
+        <div class="finish-emoji" aria-hidden="true">🥲</div>
+        <p class="eyebrow">Session complete</p>
+        <h1 id="finishTitle">CHALO KAHI TO FEMALE INTERACTION HUA,<br /><span>WARNA AAPKI SINGLE LIFE ME LAUDA KOI NHI HAI AESA.</span></h1>
+        <p class="thank-you">THANKYOU FOR USING THE APP<br />GENERATED BY DHAIRYA AND AI. 💘</p>
+        <button class="button button-primary" id="restartButton">Try another character <span aria-hidden="true">↻</span></button>
+      </section>
+
+      <footer><span>BHINDER</span><i>·</i> Fictional characters, playful roasts, zero real romance.</footer>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
