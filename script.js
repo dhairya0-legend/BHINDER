@@ -6,14 +6,16 @@ const screenIds = [
   'finishScreen'
 ];
 
-const characters = document.querySelectorAll('.choose-card');
+const characters =
+  document.querySelectorAll('.choose-card');
 
-const messages = document.getElementById('messages');
+const messages =
+  document.getElementById('messages');
 
 const messageInput =
   document.getElementById('messageInput');
 
-let currentCharacter = 'Riya';
+let currentCharacter = 'Mika';
 
 let conversationHistory = [];
 
@@ -31,7 +33,8 @@ function showScreen(screenId) {
 
     if (!screen) return;
 
-    const active = id === screenId;
+    const active =
+      id === screenId;
 
     screen.hidden = !active;
 
@@ -85,6 +88,11 @@ function addMessage(text, sender) {
 
   messages.scrollTop =
     messages.scrollHeight;
+
+  return {
+    bubble,
+    body
+  };
 }
 
 
@@ -169,10 +177,36 @@ characters.forEach((card) => {
     const chatAvatar =
       document.getElementById('chatAvatar');
 
-    chatAvatar.src = image;
+    if (chatAvatar) {
 
-    chatAvatar.alt =
-      `${name} profile picture`;
+      // Supports both emoji divs and img elements
+
+      if (
+        chatAvatar.tagName === 'IMG'
+      ) {
+
+        chatAvatar.src = image;
+
+      } else {
+
+        chatAvatar.innerHTML = '';
+
+        const img =
+          document.createElement('img');
+
+        img.src = image;
+
+        img.alt =
+          `${name} profile picture`;
+
+        img.className =
+          'avatar-image';
+
+        chatAvatar.appendChild(img);
+
+      }
+
+    }
 
 
     // Clear old messages
@@ -200,7 +234,7 @@ characters.forEach((card) => {
 
 
 // =========================
-// AI CHAT
+// STREAMING AI CHAT
 // =========================
 
 document
@@ -229,7 +263,7 @@ document
       messageInput.disabled = true;
 
 
-      // Typing indicator
+      // Temporary typing indicator
 
       const typing =
         document.createElement('div');
@@ -238,7 +272,7 @@ document
         'message bot';
 
       typing.textContent =
-        `${currentCharacter} is typing...`;
+        `${currentCharacter} is thinking...`;
 
       messages.appendChild(typing);
 
@@ -275,8 +309,35 @@ document
           );
 
 
-        const data =
-          await response.json();
+        if (!response.ok) {
+
+          let errorMessage =
+            'AI request failed';
+
+          try {
+
+            const errorData =
+              await response.json();
+
+            errorMessage =
+              errorData.error ||
+              errorMessage;
+
+          } catch (_) {}
+
+          throw new Error(
+            errorMessage
+          );
+        }
+
+
+        if (!response.body) {
+
+          throw new Error(
+            'Streaming is not supported by this response.'
+          );
+
+        }
 
 
         // Remove typing indicator
@@ -284,22 +345,69 @@ document
         typing.remove();
 
 
-        if (!response.ok) {
+        // Create empty bot message
 
-          throw new Error(
-            data.error ||
-            'AI request failed'
+        const botMessage =
+          addMessage(
+            '',
+            'bot'
           );
 
+        const botBody =
+          botMessage.body;
+
+
+        // Read stream
+
+        const reader =
+          response.body.getReader();
+
+        const decoder =
+          new TextDecoder();
+
+        let fullReply = '';
+
+        while (true) {
+
+          const {
+            value,
+            done
+          } = await reader.read();
+
+          if (done) break;
+
+
+          const chunk =
+            decoder.decode(
+              value,
+              {
+                stream: true
+              }
+            );
+
+          fullReply += chunk;
+
+          botBody.textContent =
+            fullReply;
+
+          messages.scrollTop =
+            messages.scrollHeight;
         }
 
 
-        // Display response
+        // Flush decoder
 
-        addMessage(
-          data.reply,
-          'bot'
-        );
+        fullReply +=
+          decoder.decode();
+
+
+        if (!fullReply.trim()) {
+
+          throw new Error(
+            'AI returned an empty response.'
+          );
+
+        }
 
 
         // Save conversation
@@ -312,12 +420,11 @@ document
 
         });
 
-
         conversationHistory.push({
 
           role: 'assistant',
 
-          content: data.reply
+          content: fullReply
 
         });
 
@@ -330,7 +437,6 @@ document
         );
 
         typing.remove();
-
 
         addMessage(
           'Oops 😭 Something went wrong. Try again.',
@@ -387,6 +493,8 @@ document
 document
   .getElementById('restartButton')
   .addEventListener('click', () => {
+
+    conversationHistory = [];
 
     showScreen(
       'chooseScreen'
