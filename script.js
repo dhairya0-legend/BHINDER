@@ -325,20 +325,36 @@ document
           let errorMessage =
             'AI request failed';
 
+          let fromWorker = false;
+
           try {
 
             const errorData =
               await response.json();
 
-            errorMessage =
-              errorData.error ||
-              errorMessage;
+            if (errorData.error) {
+
+              errorMessage =
+                errorData.error;
+
+              fromWorker = true;
+
+            }
 
           } catch (_) {}
 
-          throw new Error(
-            errorMessage
-          );
+          const failure =
+            new Error(errorMessage);
+
+          // Messages written by our own Worker are safe to show visitors
+          if (fromWorker) {
+
+            failure.userMessage =
+              errorMessage;
+
+          }
+
+          throw failure;
         }
 
 
@@ -451,7 +467,8 @@ document
         }
 
         addMessage(
-          'Oops 😭 Something went wrong. Try again.',
+          error.userMessage ||
+            'Oops 😭 Something went wrong. Try again.',
           'bot'
         );
 
