@@ -19,6 +19,14 @@ let currentCharacter = 'Mika';
 
 let conversationHistory = [];
 
+// Opening line for each character
+const openingLines = {
+  Mika: "Hm. You showed up. Try not to say anything silly in the first minute.",
+  Shiori: "Oh, a new visitor! Sit down. I'll tease you first and help you later, maybe.",
+  Mina: "WAIT\u2014you're actually here?! Okay, tell me everything. Anime opinions, go!",
+  Makima: "Interesting. You came all the way here. Go on, say something."
+};
+
 
 // =========================
 // SCREEN SWITCHING
@@ -217,6 +225,7 @@ characters.forEach((card) => {
     // Opening message
 
     addMessage(
+      openingLines[name] ||
       `Oh, hi. I’m ${name}. So, what makes you think you can keep up with me?`,
       'bot'
     );
@@ -279,6 +288,8 @@ document
       messages.scrollTop =
         messages.scrollHeight;
 
+
+      let botMessage = null;
 
       try {
 
@@ -347,11 +358,7 @@ document
 
         // Create empty bot message
 
-        const botMessage =
-          addMessage(
-            '',
-            'bot'
-          );
+        botMessage = addMessage('', 'bot');
 
         const botBody =
           botMessage.body;
@@ -437,6 +444,11 @@ document
         );
 
         typing.remove();
+
+        // Don't leave an empty chat bubble behind after an error
+        if (botMessage && !botMessage.body.textContent.trim()) {
+          botMessage.bubble.remove();
+        }
 
         addMessage(
           'Oops 😭 Something went wrong. Try again.',
