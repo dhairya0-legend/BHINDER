@@ -18,7 +18,7 @@
       width: 100px;
       height: 100px;
       object-fit: cover;
-      object-position: center;
+      object-position: center top;
       border-radius: 24px;
       display: block;
       margin: 0 auto 12px;
@@ -48,6 +48,12 @@
         width: 75px;
         height: 75px;
       }
+    }
+
+    /* Chat header picture: show the face, not the middle of the image */
+    .avatar-image {
+      object-fit: cover;
+      object-position: center top;
     }
   </style>
 </head>
@@ -110,7 +116,7 @@
         <p class="intro">
           Only for adults 18+. Meet fictional anime characters,
           get roasted, and have a laugh. No real dating,
-          no real AI—just playful chat.
+          no real people—just AI-powered playful chat.
         </p>
 
         <button
@@ -550,7 +556,7 @@
 
 
         <p class="chat-disclaimer">
-          Local demo replies · fictional character · not a real person or AI
+          AI-powered replies · fictional character · not a real person
         </p>
 
       </div>
