@@ -1525,3 +1525,100 @@ footer i {
     transition-duration: .01ms !important;
   }
 }
+/* ===== BHINDER FINAL VISUAL OVERRIDES ===== */
+
+body {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 70, 150, 0.16), transparent 32%),
+    radial-gradient(circle at 85% 20%, rgba(130, 80, 255, 0.18), transparent 30%),
+    #0b0810 !important;
+}
+
+.app-shell {
+  max-width: 1180px !important;
+  margin: 28px auto !important;
+  padding: 0 22px !important;
+}
+
+.topbar {
+  background: rgba(18, 13, 24, 0.72) !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  border-radius: 22px !important;
+  backdrop-filter: blur(18px) !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,.3) !important;
+}
+
+.choose-grid {
+  gap: 22px !important;
+}
+
+.choose-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.075),
+    rgba(255,255,255,.025)
+  ) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 26px !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 55px rgba(0,0,0,.28) !important;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease !important;
+}
+
+.choose-card:hover {
+  transform: translateY(-8px) !important;
+  border-color: rgba(255,105,180,.45) !important;
+  box-shadow: 0 28px 70px rgba(255,60,150,.15) !important;
+}
+
+.choose-card img {
+  width: 100% !important;
+  height: 330px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.profile-image,
+.profile-image img,
+.chat-avatar,
+.chat-avatar img {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
+
+.chat-panel {
+  background: rgba(18, 13, 24, .78) !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  border-radius: 26px !important;
+  backdrop-filter: blur(18px) !important;
+  box-shadow: 0 25px 80px rgba(0,0,0,.35) !important;
+}
+
+.message {
+  border-radius: 18px !important;
+}
+
+.message.user {
+  background: linear-gradient(135deg, #ff4fa3, #a855f7) !important;
+}
+
+.message.bot {
+  background: rgba(255,255,255,.065) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+}
+
+button {
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease !important;
+}
+
+button:hover {
+  transform: translateY(-2px) !important;
+}
+
+.primary-btn {
+  box-shadow: 0 12px 35px rgba(255,70,160,.22) !important;
+}
