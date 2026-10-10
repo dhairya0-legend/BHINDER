@@ -2682,3 +2682,179 @@ body.menu-open .menu-drawer {
 .gender-btn:focus-visible {
   background: color-mix(in srgb, var(--accent) 38%, transparent);
 }
+
+
+/* =========================================
+   FRONT PAGE: floating hearts, ticker, category tiles
+   ========================================= */
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.floaters {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floaters span {
+  position: absolute;
+  bottom: -40px;
+  line-height: 1;
+  opacity: 0;
+  animation: floatUp linear infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes floatUp {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--peak, 0.4); }
+  90%  { opacity: var(--peak, 0.4); }
+  100% { transform: translate(var(--dx, 30px), -112vh) rotate(var(--rot, 40deg)); opacity: 0; }
+}
+
+/* ---- Roast ticker ---- */
+
+.roast-ticker {
+  width: 100%;
+  max-width: 900px;
+  margin: 36px auto 0;
+  overflow: hidden;
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tickerMove 45s linear infinite;
+}
+
+.roast-ticker:hover .ticker-track { animation-play-state: paused; }
+
+.ticker-group {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 12px 28px 12px 0;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.ticker-group i {
+  font-style: normal;
+  color: #ff5fa2;
+}
+
+@keyframes tickerMove {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ---- Category tiles ---- */
+
+.category-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  max-width: 780px;
+  margin: 40px auto 0;
+}
+
+.category-tile {
+  --tile: #ff5fa2;
+  --tile-2: #e786ff;
+  position: relative;
+  padding: 24px 22px 22px;
+  text-align: center;
+  border-radius: 26px;
+  border: 1px solid color-mix(in srgb, var(--tile) 55%, transparent);
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--tile) 24%, transparent), transparent 70%),
+    rgba(20, 14, 28, 0.85);
+  box-shadow: 0 0 36px color-mix(in srgb, var(--tile) 22%, transparent);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.category-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 52px color-mix(in srgb, var(--tile) 40%, transparent);
+}
+
+.tile-divas {
+  --tile: #ff2d4a;
+  --tile-2: #ff7a5c;
+}
+
+.category-tile h2 {
+  margin: 8px 0 6px;
+  font-size: 1.35rem;
+}
+
+.category-tile p {
+  margin: 0 0 18px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  opacity: 0.75;
+}
+
+.tile-emoji { font-size: 1.6rem; }
+
+.tile-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: linear-gradient(90deg, var(--tile), var(--tile-2));
+}
+
+.tile-faces {
+  display: flex;
+  justify-content: center;
+}
+
+.tile-faces img {
+  width: 56px;
+  height: 56px;
+  margin-left: -14px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  border: 3px solid #17111f;
+  background: #17111f;
+}
+
+.tile-faces img:first-child { margin-left: 0; }
+
+@media (max-width: 600px) {
+  .category-tiles { grid-template-columns: 1fr; }
+  .roast-ticker { margin-top: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .roast-ticker { overflow-x: auto; }
+  .floaters { display: none; }
+}
+
+.category-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category-tile .tile-faces {
+  margin-top: auto;
+}

@@ -46,7 +46,7 @@
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff5fa2'/%3E%3Cstop offset='1' stop-color='%239d7cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2317111f'/%3E%3Cpath d='M32 50C10 35 12 18 24 18c4 0 7 2 8 5 1-3 4-5 8-5 12 0 14 17-8 32z' fill='url(%23g)'/%3E%3C/svg%3E"
   />
 
-<link rel="stylesheet" href="styles.css?v=7" />
+<link rel="stylesheet" href="styles.css?v=9" />
 
   <style>
     /* =========================================
@@ -98,6 +98,8 @@
 </head>
 
 <body>
+
+  <div class="floaters" id="floaters" aria-hidden="true"></div>
 
   <main class="app-shell">
 
@@ -188,96 +190,68 @@
 
 
       <!-- =========================================
-           WELCOME CHARACTER PREVIEW
+           ROAST TICKER
            ========================================= -->
 
-      <div
-        class="character-grid preview-grid"
-        aria-label="Fictional adult anime characters"
-      >
-
-        <!-- MIKA -->
-
-        <article class="character-card">
-
-          <img
-            class="avatar profile-image"
-            src="MIKA.png"
-            alt="Mika fictional character"
-          />
-
-          <strong>
-            Mika
-          </strong>
-
-          <span>
-            Quiet loyal guardian
-          </span>
-
-        </article>
-
-
-        <!-- SHIORI -->
-
-        <article class="character-card">
-
-          <img
-            class="avatar profile-image"
-            src="SHIORI.png"
-            alt="Shiori fictional character"
-          />
-
-          <strong>
-            Shiori
-          </strong>
-
-          <span>
-            Graceful, playful and intelligent
-          </span>
-
-        </article>
+      <div class="roast-ticker" aria-label="Sample roasts from the characters">
+        <div class="ticker-track">
+        <div class="ticker-group">
+          <span>Your rizz: 2/10 💀</span><i aria-hidden="true">✦</i>
+          <span>Kaun hai woh?! 😤</span><i aria-hidden="true">✦</i>
+          <span>Bro really said “hi” and stopped 💀</span><i aria-hidden="true">✦</i>
+          <span>Typing… deleting… typing… that’s your whole personality</span><i aria-hidden="true">✦</i>
+          <span>Aapka reply time dekh ke WiFi bhi sharma gaya</span><i aria-hidden="true">✦</i>
+          <span>Red: I only roast people I like. You’re welcome.</span><i aria-hidden="true">✦</i>
+          <span>Zara: Try again, hero.</span><i aria-hidden="true">✦</i>
+          <span>Rosie: Tune “hi” bola? Sirf “hi”?!</span><i aria-hidden="true">✦</i>
+          <span>Sia: Rule 1: sach bolo. Rule 2 doesn’t exist.</span><i aria-hidden="true">✦</i>
+          <span>Seen at 2 AM. Replied at 2 PM. Iconic.</span><i aria-hidden="true">✦</i>
+        </div>
+        <div class="ticker-group" aria-hidden="true">
+          <span>Your rizz: 2/10 💀</span><i aria-hidden="true">✦</i>
+          <span>Kaun hai woh?! 😤</span><i aria-hidden="true">✦</i>
+          <span>Bro really said “hi” and stopped 💀</span><i aria-hidden="true">✦</i>
+          <span>Typing… deleting… typing… that’s your whole personality</span><i aria-hidden="true">✦</i>
+          <span>Aapka reply time dekh ke WiFi bhi sharma gaya</span><i aria-hidden="true">✦</i>
+          <span>Red: I only roast people I like. You’re welcome.</span><i aria-hidden="true">✦</i>
+          <span>Zara: Try again, hero.</span><i aria-hidden="true">✦</i>
+          <span>Rosie: Tune “hi” bola? Sirf “hi”?!</span><i aria-hidden="true">✦</i>
+          <span>Sia: Rule 1: sach bolo. Rule 2 doesn’t exist.</span><i aria-hidden="true">✦</i>
+          <span>Seen at 2 AM. Replied at 2 PM. Iconic.</span><i aria-hidden="true">✦</i>
+        </div>
+        </div>
+      </div>
 
 
-        <!-- MINA -->
+      <!-- =========================================
+           CATEGORY TILES
+           ========================================= -->
 
-        <article class="character-card">
+      <div class="category-tiles" aria-label="Categories">
 
-          <img
-            class="avatar profile-image"
-            src="MINA.png"
-            alt="Mina fictional character"
-          />
+        <div class="category-tile tile-anime">
+          <span class="tile-emoji" aria-hidden="true">🌸</span>
+          <h2>Anime Fangurls</h2>
+          <p>Your favourite anime crushes, ready to tease you.</p>
+          <div class="tile-faces" aria-hidden="true">
+            <img src="MIKA.png" alt="" />
+            <img src="SHIORI.png" alt="" />
+            <img src="MINA.png" alt="" />
+            <img src="MAKIMA.png" alt="" />
+          </div>
+        </div>
 
-          <strong>
-            Mina
-          </strong>
-
-          <span>
-            Energetic otaku
-          </span>
-
-        </article>
-
-
-        <!-- MAKIMA -->
-
-        <article class="character-card">
-
-          <img
-            class="avatar profile-image"
-            src="MAKIMA.png"
-            alt="Makima fictional character"
-          />
-
-          <strong>
-            Makima
-          </strong>
-
-          <span>
-            Calm anime authority
-          </span>
-
-        </article>
+        <div class="category-tile tile-divas">
+          <span class="tile-badge">🔥 CRAZY ZONE · 18+</span>
+          <h2>4 Crazy Divas</h2>
+          <p>Zara, Red, Rosie and Sia. Zero mercy, maximum chaos.</p>
+          <div class="tile-faces" aria-hidden="true">
+            <img src="ZARA.png" alt="" />
+            <img src="RED.png" alt="" />
+            <img src="ROSIE.png" alt="" />
+            <img src="SIA.png" alt="" />
+          </div>
+        </div>
 
       </div>
 
@@ -883,7 +857,7 @@
        JAVASCRIPT
        ========================================= -->
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8"></script>
 
 </body>
 </html>

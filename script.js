@@ -1308,3 +1308,50 @@ renderCategoryList();
 buildDeck();
 
 updateMenuActive('welcomeScreen');
+
+
+// =========================
+// FLOATING HEARTS AND SPARKLES
+// =========================
+
+(function makeFloaters() {
+
+  const box = document.getElementById('floaters');
+
+  if (!box) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const symbols = ['♡', '♥', '✦', '✧', '♡', '♥'];
+
+  const colours = ['#ff5fa2', '#e786ff', '#9d7cff', '#ff8fb8', '#ffb066'];
+
+  const count = window.innerWidth < 600 ? 10 : 18;
+
+  for (let i = 0; i < count; i++) {
+
+    const item = document.createElement('span');
+
+    item.textContent = symbols[i % symbols.length];
+
+    item.style.left = (Math.random() * 100) + '%';
+
+    item.style.fontSize = (12 + Math.random() * 20) + 'px';
+
+    item.style.color = colours[Math.floor(Math.random() * colours.length)];
+
+    item.style.animationDuration = (14 + Math.random() * 16) + 's';
+
+    item.style.animationDelay = (-Math.random() * 30) + 's';
+
+    item.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+
+    item.style.setProperty('--rot', (Math.random() * 80 - 40) + 'deg');
+
+    item.style.setProperty('--peak', (0.25 + Math.random() * 0.3).toFixed(2));
+
+    box.appendChild(item);
+
+  }
+
+})();
