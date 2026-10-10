@@ -598,8 +598,9 @@ async function sendMessage(text) {
 
           fullReply += chunk;
 
+          // The chat cannot show *formatting*, so stray asterisks are removed
           botBody.textContent =
-            fullReply;
+            fullReply.replace(/\*/g, '');
 
           messages.scrollTop =
             messages.scrollHeight;
@@ -610,6 +611,10 @@ async function sendMessage(text) {
 
         fullReply +=
           decoder.decode();
+
+        fullReply = fullReply.replace(/\*/g, '');
+
+        botBody.textContent = fullReply;
 
 
         if (!fullReply.trim()) {
