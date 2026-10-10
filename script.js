@@ -32,7 +32,7 @@ const openingLines = {
 };
 
 // Categories that need the "crazy zone" warning before chatting
-const warnedCategories = ['crazy-girls'];
+const warnedCategories = ['crazy-divas'];
 
 
 // =========================
@@ -643,7 +643,7 @@ document
 
 const categories = [
   { id: 'anime-fangurls', name: 'Anime Fangurls', emoji: '🌸' },
-  { id: 'crazy-girls', name: '2 Crazy Girls', emoji: '🔥' }
+  { id: 'crazy-divas', name: '4 Crazy Divas', emoji: '🔥' }
 ];
 
 let currentCategory = categories[0].id;
