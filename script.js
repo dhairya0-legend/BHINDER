@@ -694,9 +694,15 @@ document
 
     conversationHistory = [];
 
-    showScreen(
-      'chooseScreen'
-    );
+    showScreen('loadingScreen');
+
+    setTimeout(() => {
+
+      showScreen('chooseScreen');
+
+      openMenu();
+
+    }, 1000);
 
   });
 
