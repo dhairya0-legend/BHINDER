@@ -154,6 +154,9 @@ document
 
       showScreen('chooseScreen');
 
+      // Send the visitor straight to the category menu
+      openMenu();
+
     }, 1000);
 
   });
