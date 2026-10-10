@@ -491,7 +491,7 @@ async function sendMessage(text) {
                   text,
 
                 history:
-                  conversationHistory,
+                  conversationHistory.slice(-30),
 
                 gender:
                   userGender
