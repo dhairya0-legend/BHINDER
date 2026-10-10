@@ -37,7 +37,7 @@ const openingLines = {
   Makima: "Interesting. You came all the way here. Go on, say something.",
   Zara: "Hey you, welcome in. Before we start, are you a guy or a girl?",
   Red: "Finally, someone to roast. First, guy or girl? I need to know who I'm destroying.",
-  Rosie: "You're LATE. I was worried sick! Quick, tell me: guy or girl?",
+  Rosie: "Oyeee finally! Kahan marr gaya tha? Pehle bata, tu guy hai ya girl?",
   Sia: "Rule 1: answer fast. Are you a guy or a girl? Rule 2 doesn't exist yet!"
 };
 
