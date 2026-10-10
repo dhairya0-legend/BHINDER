@@ -46,7 +46,7 @@
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff5fa2'/%3E%3Cstop offset='1' stop-color='%239d7cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2317111f'/%3E%3Cpath d='M32 50C10 35 12 18 24 18c4 0 7 2 8 5 1-3 4-5 8-5 12 0 14 17-8 32z' fill='url(%23g)'/%3E%3C/svg%3E"
   />
 
-<link rel="stylesheet" href="styles.css?v=5" />
+<link rel="stylesheet" href="styles.css?v=6" />
 
   <style>
     /* =========================================
@@ -513,6 +513,42 @@
 
         </button>
 
+        <!-- =====================================
+             2 CRAZY GIRLS (original characters)
+             ===================================== -->
+
+        <button class="character-card choose-card" data-category="crazy-girls" type="button"
+          data-name="Rani" data-vibe="Rizz judge with zero mercy" data-image="RANI.svg" data-emoji="💋">
+          <img class="avatar profile-image" src="RANI.svg" alt="Rani fictional character" />
+          <strong>Rani</strong>
+          <span>Rizz judge with zero mercy</span>
+          <small>“Rate your own pickup line. I'll wait. I'll also laugh.”</small>
+        </button>
+
+        <button class="character-card choose-card" data-category="crazy-girls" type="button"
+          data-name="Tanvi" data-vibe="Savage roaster, secretly into you" data-image="TANVI.svg" data-emoji="🗡️">
+          <img class="avatar profile-image" src="TANVI.svg" alt="Tanvi fictional character" />
+          <strong>Tanvi</strong>
+          <span>Savage roaster, secretly into you</span>
+          <small>“I only roast people I find interesting. Congrats, I guess.”</small>
+        </button>
+
+        <button class="character-card choose-card" data-category="crazy-girls" type="button"
+          data-name="Dolly" data-vibe="Drama queen, jealous by default" data-image="DOLLY.svg" data-emoji="🎭">
+          <img class="avatar profile-image" src="DOLLY.svg" alt="Dolly fictional character" />
+          <strong>Dolly</strong>
+          <span>Drama queen, jealous by default</span>
+          <small>“Tune ‘hi’ bola? Sirf ‘hi’?! Kaun hai woh?!”</small>
+        </button>
+
+        <button class="character-card choose-card" data-category="crazy-girls" type="button"
+          data-name="Chhavi" data-vibe="Pure chaos, dares and plot twists" data-image="CHHAVI.svg" data-emoji="🌀">
+          <img class="avatar profile-image" src="CHHAVI.svg" alt="Chhavi fictional character" />
+          <strong>Chhavi</strong>
+          <span>Pure chaos, dares and plot twists</span>
+          <small>“Rule 1: sach bolo. Rule 2: Rule 1 maine abhi banaya.”</small>
+        </button>
+
             </div>
 
       <div
@@ -753,6 +789,27 @@
 
 
   <!-- =========================================
+       CRAZY ZONE WARNING
+       ========================================= -->
+
+  <div class="crazy-warning" id="crazyWarning" role="dialog" aria-modal="true" aria-labelledby="crazyWarningTitle" hidden>
+    <div class="crazy-warning-box">
+      <div class="crazy-warning-icon" aria-hidden="true">⚠️</div>
+      <h2 id="crazyWarningTitle">CRAZY ZONE · 18+</h2>
+      <p>
+        These fictional characters are extremely savage. Expect heavy roasting,
+        wild flirting and zero mercy. It's all pretend, so don't take it personally.
+        Not for the easily offended.
+      </p>
+      <div class="crazy-warning-actions">
+        <button class="button button-primary" id="crazyAccept" type="button">I can handle it 🔥</button>
+        <button class="button" id="crazyDecline" type="button">Take me back</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================
        SIDEBAR MENU
        ========================================= -->
 
@@ -833,7 +890,7 @@
        JAVASCRIPT
        ========================================= -->
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 
 </body>
 </html>

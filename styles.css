@@ -2604,3 +2604,57 @@ body.menu-open .menu-drawer {
     font-size: 28px;
   }
 }
+
+
+/* =========================================
+   2 CRAZY GIRLS
+   ========================================= */
+
+.chat-screen[data-character="Rani"],   .choose-card[data-name="Rani"]   { --accent: #ff3d81; --accent-2: #ffb347; }
+.chat-screen[data-character="Tanvi"],  .choose-card[data-name="Tanvi"]  { --accent: #8a2be2; --accent-2: #ff4d5e; }
+.chat-screen[data-character="Dolly"],  .choose-card[data-name="Dolly"]  { --accent: #ff6ec7; --accent-2: #7b61ff; }
+.chat-screen[data-character="Chhavi"], .choose-card[data-name="Chhavi"] { --accent: #00d4aa; --accent-2: #ffd93d; }
+
+.crazy-warning {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(8, 5, 12, 0.82);
+  backdrop-filter: blur(6px);
+}
+
+.crazy-warning[hidden] { display: none; }
+
+.crazy-warning-box {
+  max-width: 420px;
+  padding: 28px 24px;
+  text-align: center;
+  border-radius: 24px;
+  border: 2px solid #ff4d5e;
+  background: #17111f;
+  box-shadow: 0 0 40px rgba(255, 77, 94, 0.35);
+}
+
+.crazy-warning-icon { font-size: 40px; }
+
+.crazy-warning-box h2 {
+  margin: 8px 0 12px;
+  color: #ff4d5e;
+  letter-spacing: 0.08em;
+}
+
+.crazy-warning-box p {
+  margin: 0 0 20px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.crazy-warning-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}

@@ -24,8 +24,15 @@ const openingLines = {
   Mika: "Hm. You showed up. Try not to say anything silly in the first minute.",
   Shiori: "Oh, a new visitor! Sit down. I'll tease you first and help you later, maybe.",
   Mina: "WAIT\u2014you're actually here?! Okay, tell me everything. Anime opinions, go!",
-  Makima: "Interesting. You came all the way here. Go on, say something."
+  Makima: "Interesting. You came all the way here. Go on, say something.",
+  Rani: "Oh look, a new contestant. Send your best line. I'm scoring it out of 10 and I'm stingy.",
+  Tanvi: "Finally someone to roast. Don't worry, I only do this to people I find interesting. Probably.",
+  Dolly: "You're late. I was starting to think you'd found someone else. Did you? Tell me the truth.",
+  Chhavi: "Rule 1: tell me something true. Rule 2: I'll make up Rule 2 later. Go!"
 };
+
+// Categories that need the "crazy zone" warning before chatting
+const warnedCategories = ['crazy-girls'];
 
 
 // =========================
@@ -153,7 +160,57 @@ document
 // CHARACTER SELECTION
 // =========================
 
+let crazyWarned = false;
+
+let pendingCard = null;
+
+const crazyWarning =
+  document.getElementById('crazyWarning');
+
 function startChat(card) {
+
+  if (
+    warnedCategories.includes(card.dataset.category) &&
+    !crazyWarned
+  ) {
+
+    pendingCard = card;
+
+    crazyWarning.hidden = false;
+
+    document.getElementById('crazyAccept').focus();
+
+    return;
+  }
+
+  beginChat(card);
+}
+
+document
+  .getElementById('crazyAccept')
+  .addEventListener('click', () => {
+
+    crazyWarned = true;
+
+    crazyWarning.hidden = true;
+
+    if (pendingCard) beginChat(pendingCard);
+
+    pendingCard = null;
+
+  });
+
+document
+  .getElementById('crazyDecline')
+  .addEventListener('click', () => {
+
+    crazyWarning.hidden = true;
+
+    pendingCard = null;
+
+  });
+
+function beginChat(card) {
 
     currentCharacter =
       card.dataset.name;
@@ -585,7 +642,8 @@ document
 //      data-category="your-id" (copy one of the cards in the deck).
 
 const categories = [
-  { id: 'anime-fangurls', name: 'Anime Fangurls', emoji: '🌸' }
+  { id: 'anime-fangurls', name: 'Anime Fangurls', emoji: '🌸' },
+  { id: 'crazy-girls', name: '2 Crazy Girls', emoji: '🔥' }
 ];
 
 let currentCategory = categories[0].id;
