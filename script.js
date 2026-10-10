@@ -22,6 +22,13 @@ let conversationHistory = [];
 // Chosen on the gender picker (Crazy Divas only): 'male', 'female' or 'other'
 let userGender = null;
 
+// Last chat exchange, used for the shareable roast card
+let lastExchange = null;
+
+let currentImage = '';
+
+const SITE_URL = 'https://dhairya0-legend.github.io/BHINDER/';
+
 // Opening line for each character
 const openingLines = {
   Mika: "Hm. You showed up. Try not to say anything silly in the first minute.",
@@ -357,6 +364,10 @@ function beginChat(card) {
 
     userGender = null;
 
+    lastExchange = null;
+
+    currentImage = image;
+
     messageInput.disabled = false;
 
     if (warnedCategories.includes(card.dataset.category)) {
@@ -621,6 +632,13 @@ async function sendMessage(text) {
 
         });
 
+        lastExchange = {
+          name: currentCharacter,
+          image: currentImage,
+          user: text,
+          bot: fullReply.trim()
+        };
+
 
       } catch (error) {
 
@@ -680,6 +698,8 @@ document
     showScreen(
       'finishScreen'
     );
+
+    renderShareCard();
 
   });
 
@@ -1355,3 +1375,449 @@ updateMenuActive('welcomeScreen');
   }
 
 })();
+
+
+
+// =========================
+// SHAREABLE ROAST CARD
+// =========================
+
+const shareCanvas = document.getElementById('shareCanvas');
+const shareBlock = document.getElementById('shareBlock');
+const shareStatus = document.getElementById('shareStatus');
+
+function loadImage(src) {
+
+  return new Promise((resolve, reject) => {
+
+    const img = new Image();
+
+    img.onload = () => resolve(img);
+
+    img.onerror = reject;
+
+    img.src = src;
+
+  });
+}
+
+function roundedRect(ctx, x, y, w, h, r) {
+
+  ctx.beginPath();
+
+  ctx.moveTo(x + r, y);
+
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+
+  ctx.arcTo(x, y + h, x, y, r);
+
+  ctx.arcTo(x, y, x + w, y, r);
+
+  ctx.closePath();
+}
+
+// Splits text into lines that fit a width
+function wrapLines(ctx, text, maxWidth) {
+
+  const words = text.split(/\s+/);
+
+  const lines = [];
+
+  let line = '';
+
+  words.forEach((word) => {
+
+    const test = line ? line + ' ' + word : word;
+
+    if (ctx.measureText(test).width > maxWidth && line) {
+
+      lines.push(line);
+
+      line = word;
+
+    } else {
+
+      line = test;
+
+    }
+
+  });
+
+  if (line) lines.push(line);
+
+  return lines;
+}
+
+async function renderShareCard() {
+
+  shareStatus.textContent = '';
+
+  if (!lastExchange) {
+
+    shareBlock.hidden = true;
+
+    return;
+  }
+
+  shareBlock.hidden = false;
+
+  const W = 1080;
+
+  const H = 1350;
+
+  const ctx = shareCanvas.getContext('2d');
+
+  const colours = getComputedStyle(document.getElementById('chatScreen'));
+
+  const accent = colours.getPropertyValue('--accent').trim() || '#ff5fa2';
+
+  const accent2 = colours.getPropertyValue('--accent-2').trim() || '#e786ff';
+
+  try {
+
+    await document.fonts.load('800 60px "DM Sans"');
+
+    await document.fonts.load('600 40px "DM Sans"');
+
+  } catch (_) {}
+
+  let avatar = null;
+
+  try {
+
+    avatar = await loadImage(lastExchange.image);
+
+  } catch (_) {}
+
+  const font = 'DM Sans, system-ui, sans-serif';
+
+  // Background
+
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+
+  bg.addColorStop(0, '#1b1228');
+
+  bg.addColorStop(1, '#0b0810');
+
+  ctx.fillStyle = bg;
+
+  ctx.fillRect(0, 0, W, H);
+
+  const glow = ctx.createRadialGradient(W / 2, 330, 40, W / 2, 330, 640);
+
+  glow.addColorStop(0, accent + '66');
+
+  glow.addColorStop(1, 'transparent');
+
+  ctx.fillStyle = glow;
+
+  ctx.fillRect(0, 0, W, H);
+
+  // Header
+
+  ctx.textBaseline = 'alphabetic';
+
+  ctx.textAlign = 'left';
+
+  ctx.fillStyle = '#ffffff';
+
+  ctx.font = '800 46px ' + font;
+
+  ctx.fillText('\u2661 BHINDER', 70, 110);
+
+  ctx.textAlign = 'right';
+
+  ctx.fillStyle = 'rgba(255,255,255,0.55)';
+
+  ctx.font = '600 26px ' + font;
+
+  ctx.fillText('TINDER KA BHAI', W - 70, 108);
+
+  // Avatar
+
+  const cx = W / 2;
+
+  const cy = 330;
+
+  const r = 130;
+
+  ctx.save();
+
+  ctx.beginPath();
+
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+
+  ctx.closePath();
+
+  ctx.clip();
+
+  if (avatar) {
+
+    const side = Math.min(avatar.width, avatar.height);
+
+    ctx.drawImage(avatar, (avatar.width - side) / 2, 0, side, side, cx - r, cy - r, r * 2, r * 2);
+
+  } else {
+
+    ctx.fillStyle = accent;
+
+    ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+
+  }
+
+  ctx.restore();
+
+  ctx.lineWidth = 8;
+
+  ctx.strokeStyle = accent;
+
+  ctx.beginPath();
+
+  ctx.arc(cx, cy, r + 4, 0, Math.PI * 2);
+
+  ctx.stroke();
+
+  // Name
+
+  ctx.textAlign = 'center';
+
+  ctx.fillStyle = '#ffffff';
+
+  ctx.font = '800 58px ' + font;
+
+  ctx.fillText(lastExchange.name, cx, 545);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.55)';
+
+  ctx.font = '500 28px ' + font;
+
+  ctx.fillText('fictional AI character', cx, 588);
+
+  // Your message (small bubble, right)
+
+  let userText = lastExchange.user;
+
+  if (userText.length > 90) userText = userText.slice(0, 87) + '...';
+
+  ctx.font = '500 38px ' + font;
+
+  const userLines = wrapLines(ctx, userText, 560).slice(0, 2);
+
+  const userWidth = Math.max(...userLines.map((l) => ctx.measureText(l).width)) + 72;
+
+  const userHeight = userLines.length * 50 + 44;
+
+  const userX = W - 70 - userWidth;
+
+  const userY = 650;
+
+  ctx.fillStyle = 'rgba(255,255,255,0.12)';
+
+  roundedRect(ctx, userX, userY, userWidth, userHeight, 34);
+
+  ctx.fill();
+
+  ctx.fillStyle = '#ffffff';
+
+  ctx.textAlign = 'left';
+
+  userLines.forEach((line, i) => {
+
+    ctx.fillText(line, userX + 36, userY + 56 + i * 50);
+
+  });
+
+  // Character's reply (big bubble, left)
+
+  let botText = lastExchange.bot.replace(/\s+/g, ' ');
+
+  const maxBottom = 1150;
+
+  const botTop = userY + userHeight + 36;
+
+  const innerWidth = 760;
+
+  let size = 58;
+
+  let lines = [];
+
+  let lineHeight = 0;
+
+  for (; size >= 34; size -= 4) {
+
+    ctx.font = '700 ' + size + 'px ' + font;
+
+    lines = wrapLines(ctx, botText, innerWidth);
+
+    lineHeight = Math.round(size * 1.3);
+
+    if (botTop + lines.length * lineHeight + 80 <= maxBottom) break;
+
+  }
+
+  const maxLines = Math.floor((maxBottom - botTop - 80) / lineHeight);
+
+  if (lines.length > maxLines) {
+
+    lines = lines.slice(0, maxLines);
+
+    lines[maxLines - 1] = lines[maxLines - 1].replace(/\s*\S*$/, '') + '...';
+
+  }
+
+  const botHeight = lines.length * lineHeight + 80;
+
+  const grad = ctx.createLinearGradient(70, botTop, W - 70, botTop + botHeight);
+
+  grad.addColorStop(0, accent);
+
+  grad.addColorStop(1, accent2);
+
+  ctx.fillStyle = grad;
+
+  roundedRect(ctx, 70, botTop, innerWidth + 80, botHeight, 44);
+
+  ctx.fill();
+
+  ctx.fillStyle = '#17111f';
+
+  ctx.textAlign = 'left';
+
+  ctx.font = '700 ' + size + 'px ' + font;
+
+  lines.forEach((line, i) => {
+
+    ctx.fillText(line, 110, botTop + 48 + size * 0.85 + i * lineHeight);
+
+  });
+
+  // Footer
+
+  ctx.textAlign = 'center';
+
+  ctx.fillStyle = '#ffffff';
+
+  ctx.font = '800 44px ' + font;
+
+  ctx.fillText('Get roasted too \uD83D\uDD25', cx, 1236);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+
+  ctx.font = '500 27px ' + font;
+
+  ctx.fillText('dhairya0-legend.github.io/BHINDER', cx, 1284);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+
+  ctx.font = '500 22px ' + font;
+
+  ctx.fillText('18+ \u00B7 fictional AI characters \u00B7 not real people', cx, 1322);
+}
+
+function cardBlob() {
+
+  return new Promise((resolve) => {
+
+    shareCanvas.toBlob(resolve, 'image/png');
+
+  });
+}
+
+function downloadBlob(blob) {
+
+  const link = document.createElement('a');
+
+  link.href = URL.createObjectURL(blob);
+
+  link.download = 'bhinder-roast.png';
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(link.href), 4000);
+}
+
+document
+  .getElementById('saveCardButton')
+  .addEventListener('click', async () => {
+
+    const blob = await cardBlob();
+
+    if (!blob) {
+
+      shareStatus.textContent = 'Could not make the image. Try again.';
+
+      return;
+    }
+
+    downloadBlob(blob);
+
+    shareStatus.textContent = 'Image saved. Post it anywhere!';
+
+  });
+
+document
+  .getElementById('shareButton')
+  .addEventListener('click', async () => {
+
+    const name = lastExchange ? lastExchange.name : 'A diva';
+
+    const text = name + ' just roasted me on BHINDER \uD83D\uDD25 Try it yourself:';
+
+    const blob = await cardBlob();
+
+    if (!blob) {
+
+      shareStatus.textContent = 'Could not make the image. Try again.';
+
+      return;
+    }
+
+    const file = new File([blob], 'bhinder-roast.png', { type: 'image/png' });
+
+    try {
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+
+        await navigator.share({ files: [file], text: text + ' ' + SITE_URL });
+
+        return;
+      }
+
+      if (navigator.share) {
+
+        await navigator.share({ text, url: SITE_URL });
+
+        return;
+      }
+
+    } catch (error) {
+
+      // The visitor closed the share sheet: nothing to do
+
+      if (error && error.name === 'AbortError') return;
+
+    }
+
+    // Fallback for browsers without sharing: save the image and copy the link
+
+    downloadBlob(blob);
+
+    try {
+
+      await navigator.clipboard.writeText(text + ' ' + SITE_URL);
+
+      shareStatus.textContent = 'Image saved and link copied. Paste it when you post!';
+
+    } catch (_) {
+
+      shareStatus.textContent = 'Image saved. Share it with ' + SITE_URL;
+
+    }
+
+  });

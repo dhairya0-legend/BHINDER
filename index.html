@@ -46,7 +46,13 @@
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff5fa2'/%3E%3Cstop offset='1' stop-color='%239d7cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2317111f'/%3E%3Cpath d='M32 50C10 35 12 18 24 18c4 0 7 2 8 5 1-3 4-5 8-5 12 0 14 17-8 32z' fill='url(%23g)'/%3E%3C/svg%3E"
   />
 
-<link rel="stylesheet" href="styles.css?v=10" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="BHINDER" />
+
+<link rel="stylesheet" href="styles.css?v=11" />
 
   <style>
     /* =========================================
@@ -717,6 +723,41 @@
       </p>
 
 
+      <div class="share-block" id="shareBlock" hidden>
+
+        <canvas
+          id="shareCanvas"
+          width="1080"
+          height="1350"
+          aria-label="Preview of your roast card"
+        ></canvas>
+
+        <div class="share-actions">
+
+          <button
+            class="button button-primary"
+            id="shareButton"
+            type="button"
+          >
+            Share my roast
+            <span aria-hidden="true">➤</span>
+          </button>
+
+          <button
+            class="button"
+            id="saveCardButton"
+            type="button"
+          >
+            Save image
+          </button>
+
+        </div>
+
+        <p class="share-status" id="shareStatus" role="status"></p>
+
+      </div>
+
+
       <button
         class="button button-primary"
         id="restartButton"
@@ -868,7 +909,7 @@
        JAVASCRIPT
        ========================================= -->
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
 
 </body>
 </html>
