@@ -7,7 +7,46 @@
 
   <title>Tinder Ka Bhai Bhinder</title>
 
-<link rel="stylesheet" href="styles.css?v=3" />
+  <meta
+    name="description"
+    content="Pick a fictional anime-style AI character and get roasted. 18+ fun only."
+  />
+
+  <!-- Link preview (WhatsApp, Instagram, X and similar apps) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="BHINDER — Tinder Ka Bhai" />
+  <meta
+    property="og:description"
+    content="Pick a fictional anime-style AI character and get roasted. 18+ fun only."
+  />
+  <meta
+    property="og:image"
+    content="https://dhairya0-legend.github.io/BHINDER/preview.png"
+  />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta
+    property="og:url"
+    content="https://dhairya0-legend.github.io/BHINDER/"
+  />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="BHINDER — Tinder Ka Bhai" />
+  <meta
+    name="twitter:description"
+    content="Pick a fictional anime-style AI character and get roasted. 18+ fun only."
+  />
+  <meta
+    name="twitter:image"
+    content="https://dhairya0-legend.github.io/BHINDER/preview.png"
+  />
+
+  <!-- Tab icon: a pink-violet heart -->
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff5fa2'/%3E%3Cstop offset='1' stop-color='%239d7cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2317111f'/%3E%3Cpath d='M32 50C10 35 12 18 24 18c4 0 7 2 8 5 1-3 4-5 8-5 12 0 14 17-8 32z' fill='url(%23g)'/%3E%3C/svg%3E"
+  />
+
+<link rel="stylesheet" href="styles.css?v=5" />
 
   <style>
     /* =========================================
@@ -68,8 +107,24 @@
 
     <header class="topbar">
 
+      <div class="topbar-left">
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="menuDrawer"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
       <a
         class="brand"
+        id="brandLink"
         href="#"
         aria-label="Bhinder home"
       >
@@ -81,6 +136,8 @@
           TINDER KA BHAI
         </span>
       </a>
+
+      </div>
 
       <span class="top-note">
         18+ FICTIONAL FUN ONLY
@@ -307,7 +364,14 @@
       </div>
 
 
-      <div class="character-grid chooser-grid">
+      <div class="deck-wrap">
+
+      <div
+        class="deck"
+        id="deck"
+        role="group"
+        aria-label="Characters. Swipe right to roast, swipe left for the next one."
+      >
 
 
         <!-- =====================================
@@ -316,6 +380,7 @@
 
         <button
           class="character-card choose-card"
+          data-category="anime-fangurls"
           type="button"
           data-name="Mika"
           data-vibe="Quiet loyal guardian"
@@ -350,6 +415,7 @@
 
         <button
           class="character-card choose-card"
+          data-category="anime-fangurls"
           type="button"
           data-name="Shiori"
           data-vibe="Graceful, playful and intelligent"
@@ -384,6 +450,7 @@
 
         <button
           class="character-card choose-card"
+          data-category="anime-fangurls"
           type="button"
           data-name="Mina"
           data-vibe="Energetic otaku"
@@ -418,6 +485,7 @@
 
         <button
           class="character-card choose-card"
+          data-category="anime-fangurls"
           type="button"
           data-name="Makima"
           data-vibe="Calm anime authority"
@@ -444,6 +512,42 @@
           </small>
 
         </button>
+
+            </div>
+
+      <div
+        class="deck-dots"
+        id="deckDots"
+        aria-hidden="true"
+      ></div>
+
+      <div class="deck-controls">
+
+        <button
+          class="deck-btn deck-btn-next"
+          id="deckNext"
+          type="button"
+          aria-label="Next character"
+        >
+          <span aria-hidden="true">✕</span>
+          Next
+        </button>
+
+        <button
+          class="deck-btn deck-btn-roast"
+          id="deckRoast"
+          type="button"
+          aria-label="Roast me with this character"
+        >
+          <span aria-hidden="true">♥</span>
+          Roast me
+        </button>
+
+      </div>
+
+      <p class="deck-hint">
+        Swipe right to roast · swipe left for next
+      </p>
 
       </div>
 
@@ -649,10 +753,87 @@
 
 
   <!-- =========================================
+       SIDEBAR MENU
+       ========================================= -->
+
+  <div
+    class="menu-overlay"
+    id="menuOverlay"
+  ></div>
+
+  <aside
+    class="menu-drawer"
+    id="menuDrawer"
+    aria-label="Menu"
+    inert
+  >
+
+    <div class="menu-head">
+
+      <span class="menu-brand">
+        <span class="brand-icon">♡</span>
+        BHINDER
+      </span>
+
+      <button
+        class="menu-close"
+        id="menuClose"
+        type="button"
+        aria-label="Close menu"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <nav
+      class="menu-nav"
+      aria-label="Main menu"
+    >
+
+      <button
+        class="menu-item is-active"
+        id="menuHome"
+        type="button"
+      >
+        <svg
+          class="menu-icon"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 11.5 12 4l9 7.5" />
+          <path d="M5.5 10v9.5h13V10" />
+          <path d="M10 19.5v-5h4v5" />
+        </svg>
+        Home
+      </button>
+
+      <p class="menu-section">
+        Categories
+      </p>
+
+      <div
+        class="menu-list"
+        id="categoryList"
+      ></div>
+
+    </nav>
+
+  </aside>
+
+
+  <!-- =========================================
        JAVASCRIPT
        ========================================= -->
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 
 </body>
 </html>
