@@ -72,9 +72,16 @@ function showScreen(screenId) {
 
   updateMenuActive(screenId);
 
+  // The floating hearts only run on the front page (saves phone battery and keeps swipes smooth)
+  document.body.classList.toggle(
+    'calm',
+    screenId !== 'welcomeScreen' &&
+    screenId !== 'loadingScreen'
+  );
+
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: 'auto'
   });
 }
 
