@@ -2658,3 +2658,27 @@ body.menu-open .menu-drawer {
   gap: 10px;
   justify-content: center;
 }
+
+/* Gender picker shown at the start of a Crazy Divas chat */
+.gender-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0 4px;
+}
+
+.gender-btn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gender-btn:hover,
+.gender-btn:focus-visible {
+  background: color-mix(in srgb, var(--accent) 38%, transparent);
+}

@@ -19,16 +19,19 @@ let currentCharacter = 'Mika';
 
 let conversationHistory = [];
 
+// Chosen on the gender picker (Crazy Divas only): 'male', 'female' or 'other'
+let userGender = null;
+
 // Opening line for each character
 const openingLines = {
   Mika: "Hm. You showed up. Try not to say anything silly in the first minute.",
   Shiori: "Oh, a new visitor! Sit down. I'll tease you first and help you later, maybe.",
   Mina: "WAIT\u2014you're actually here?! Okay, tell me everything. Anime opinions, go!",
   Makima: "Interesting. You came all the way here. Go on, say something.",
-  Zara: "Oh look, a new contestant. Send your best line. I'm scoring it out of 10 and I'm stingy.",
-  Red: "Finally someone to roast. Don't worry, I only do this to people I find interesting. Probably.",
-  Rosie: "You're late. I was starting to think you'd found someone else. Did you? Tell me the truth.",
-  Sia: "Rule 1: tell me something true. Rule 2: I'll make up Rule 2 later. Go!"
+  Zara: "New contestant! Before I judge your rizz: are you a guy or a girl?",
+  Red: "Finally, someone to roast. First, guy or girl? I need to know who I'm destroying.",
+  Rosie: "You're LATE. I was worried sick! Quick, tell me: guy or girl?",
+  Sia: "Rule 1: answer fast. Are you a guy or a girl? Rule 2 doesn't exist yet!"
 };
 
 // Categories that need the "crazy zone" warning before chatting
@@ -159,6 +162,51 @@ document
 // =========================
 // CHARACTER SELECTION
 // =========================
+
+function showGenderPicker() {
+
+  messageInput.disabled = true;
+
+  const row =
+    document.createElement('div');
+
+  row.className = 'gender-picker';
+
+  [
+    ['male', "I'm a guy"],
+    ['female', "I'm a girl"],
+    ['other', 'Rather not say']
+  ].forEach(([value, label]) => {
+
+    const button =
+      document.createElement('button');
+
+    button.type = 'button';
+
+    button.className = 'gender-btn';
+
+    button.textContent = label;
+
+    button.addEventListener('click', () => {
+
+      userGender = value;
+
+      row.remove();
+
+      sendMessage(label);
+
+    });
+
+    row.appendChild(button);
+
+  });
+
+  messages.appendChild(row);
+
+  messages.scrollTop =
+    messages.scrollHeight;
+}
+
 
 let crazyWarned = false;
 
@@ -304,7 +352,19 @@ function beginChat(card) {
 
     showScreen('chatScreen');
 
-    messageInput.focus();
+    userGender = null;
+
+    messageInput.disabled = false;
+
+    if (warnedCategories.includes(card.dataset.category)) {
+
+      showGenderPicker();
+
+    } else {
+
+      messageInput.focus();
+
+    }
 
 }
 
@@ -321,19 +381,24 @@ characters.forEach((card) => {
 
 document
   .getElementById('chatForm')
-  .addEventListener(
-    'submit',
-    async (event) => {
+  .addEventListener('submit', (event) => {
 
-      event.preventDefault();
+    event.preventDefault();
 
-      const text =
-        messageInput.value.trim();
+    const text =
+      messageInput.value.trim();
 
-      if (!text) return;
+    if (!text) return;
 
+    sendMessage(text);
+
+  });
+
+
+async function sendMessage(text) {
 
       // Display user's message
+
 
       addMessage(
         text,
@@ -412,7 +477,10 @@ document
                   text,
 
                 history:
-                  conversationHistory
+                  conversationHistory,
+
+                gender:
+                  userGender
 
               })
             }
@@ -580,8 +648,7 @@ document
 
       }
 
-    }
-  );
+}
 
 
 // =========================
