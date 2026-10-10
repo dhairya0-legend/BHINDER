@@ -35,7 +35,7 @@ const openingLines = {
   Shiori: "Oh, a new visitor! Sit down. I'll tease you first and help you later, maybe.",
   Mina: "WAIT\u2014you're actually here?! Okay, tell me everything. Anime opinions, go!",
   Makima: "Interesting. You came all the way here. Go on, say something.",
-  Zara: "New contestant! Before I judge your rizz: are you a guy or a girl?",
+  Zara: "Hey you, welcome in. Before we start, are you a guy or a girl?",
   Red: "Finally, someone to roast. First, guy or girl? I need to know who I'm destroying.",
   Rosie: "You're LATE. I was worried sick! Quick, tell me: guy or girl?",
   Sia: "Rule 1: answer fast. Are you a guy or a girl? Rule 2 doesn't exist yet!"
