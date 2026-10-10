@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Dolly avatar">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6ec7"/><stop offset="1" stop-color="#7b61ff"/></linearGradient>
-<radialGradient id="s" cx=".3" cy=".25" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
-<rect width="400" height="400" fill="url(#g)"/><rect width="400" height="400" fill="url(#s)"/>
-<circle cx="200" cy="150" r="62" fill="#17111f" opacity=".85"/>
-<path d="M70 400c0-92 58-140 130-140s130 48 130 140z" fill="#17111f" opacity=".85"/>
-<text x="200" y="175" font-family="Arial Black,Arial,sans-serif" font-size="90" font-weight="900" text-anchor="middle" fill="#fff">D</text>
-<g fill="#fff" opacity=".9"><path d="M60 70l8 18 18 8-18 8-8 18-8-18-18-8 18-8z"/><path d="M335 300l6 13 13 6-13 6-6 13-6-13-13-6 13-6z"/></g>
-</svg>

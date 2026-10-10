@@ -2610,10 +2610,10 @@ body.menu-open .menu-drawer {
    2 CRAZY GIRLS
    ========================================= */
 
-.chat-screen[data-character="Rani"],   .choose-card[data-name="Rani"]   { --accent: #ff3d81; --accent-2: #ffb347; }
-.chat-screen[data-character="Tanvi"],  .choose-card[data-name="Tanvi"]  { --accent: #8a2be2; --accent-2: #ff4d5e; }
-.chat-screen[data-character="Dolly"],  .choose-card[data-name="Dolly"]  { --accent: #ff6ec7; --accent-2: #7b61ff; }
-.chat-screen[data-character="Chhavi"], .choose-card[data-name="Chhavi"] { --accent: #00d4aa; --accent-2: #ffd93d; }
+.chat-screen[data-character="Zara"],   .choose-card[data-name="Zara"]   { --accent: #ff3d81; --accent-2: #ffb347; }
+.chat-screen[data-character="Red"],  .choose-card[data-name="Red"]  { --accent: #ff2d2d; --accent-2: #ff7a5c; }
+.chat-screen[data-character="Rosie"],  .choose-card[data-name="Rosie"]  { --accent: #ff6ec7; --accent-2: #7b61ff; }
+.chat-screen[data-character="Sia"], .choose-card[data-name="Sia"] { --accent: #00d4aa; --accent-2: #ffd93d; }
 
 .crazy-warning {
   position: fixed;

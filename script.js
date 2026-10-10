@@ -25,10 +25,10 @@ const openingLines = {
   Shiori: "Oh, a new visitor! Sit down. I'll tease you first and help you later, maybe.",
   Mina: "WAIT\u2014you're actually here?! Okay, tell me everything. Anime opinions, go!",
   Makima: "Interesting. You came all the way here. Go on, say something.",
-  Rani: "Oh look, a new contestant. Send your best line. I'm scoring it out of 10 and I'm stingy.",
-  Tanvi: "Finally someone to roast. Don't worry, I only do this to people I find interesting. Probably.",
-  Dolly: "You're late. I was starting to think you'd found someone else. Did you? Tell me the truth.",
-  Chhavi: "Rule 1: tell me something true. Rule 2: I'll make up Rule 2 later. Go!"
+  Zara: "Oh look, a new contestant. Send your best line. I'm scoring it out of 10 and I'm stingy.",
+  Red: "Finally someone to roast. Don't worry, I only do this to people I find interesting. Probably.",
+  Rosie: "You're late. I was starting to think you'd found someone else. Did you? Tell me the truth.",
+  Sia: "Rule 1: tell me something true. Rule 2: I'll make up Rule 2 later. Go!"
 };
 
 // Categories that need the "crazy zone" warning before chatting
