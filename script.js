@@ -452,6 +452,44 @@ document
   });
 
 
+// Shows a reply as one or more short chat bubbles (blank line = a new text, like double-texting)
+function paintReply(bubbles, text) {
+
+  let parts =
+    text
+      .split(/\n\s*\n/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+  if (!parts.length) parts = [''];
+
+  // Never more than three bubbles
+  if (parts.length > 3) {
+
+    parts = [parts[0], parts[1], parts.slice(2).join(' ')];
+
+  }
+
+  while (bubbles.length < parts.length) {
+
+    const extra = addMessage('', 'bot');
+
+    extra.bubble.classList.add('follow');
+
+    bubbles.push(extra);
+
+  }
+
+  parts.forEach((part, index) => {
+
+    bubbles[index].body.textContent = part;
+
+  });
+
+  return parts;
+}
+
+
 async function sendMessage(text) {
 
       // Display user's message
@@ -600,8 +638,7 @@ async function sendMessage(text) {
 
         botMessage = addMessage('', 'bot');
 
-        const botBody =
-          botMessage.body;
+        const bubbles = [botMessage];
 
 
         // Read stream
@@ -635,8 +672,7 @@ async function sendMessage(text) {
           fullReply += chunk;
 
           // The chat cannot show *formatting*, so stray asterisks are removed
-          botBody.textContent =
-            fullReply.replace(/\*/g, '');
+          paintReply(bubbles, fullReply.replace(/\*/g, ''));
 
           messages.scrollTop =
             messages.scrollHeight;
@@ -650,7 +686,7 @@ async function sendMessage(text) {
 
         fullReply = fullReply.replace(/\*/g, '');
 
-        botBody.textContent = fullReply;
+        paintReply(bubbles, fullReply);
 
 
         if (!fullReply.trim()) {
@@ -684,7 +720,7 @@ async function sendMessage(text) {
           name: currentCharacter,
           image: currentImage,
           user: text,
-          bot: fullReply.trim()
+          bot: fullReply.replace(/\s+/g, ' ').trim()
         };
 
 

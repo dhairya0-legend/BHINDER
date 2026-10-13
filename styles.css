@@ -3072,3 +3072,6 @@ body {
   .category-tiles { grid-template-columns: 1fr; }
   .tile-gents { grid-column: auto; }
 }
+
+/* A second or third short text from the same character: no repeated name label */
+.message.follow .message-label { display: none; }
