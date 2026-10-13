@@ -3043,3 +3043,32 @@ body {
   height: 100%;
   overflow-y: auto;
 }
+
+
+/* =========================================
+   2 GENTLEMEN
+   ========================================= */
+
+.chat-screen[data-character="Kabir"], .choose-card[data-name="Kabir"] { --accent: #ffb347; --accent-2: #ff5f6d; }
+.chat-screen[data-character="Neel"],  .choose-card[data-name="Neel"]  { --accent: #6ea8ff; --accent-2: #7ee8d1; }
+
+.tile-gents {
+  --tile: #ffb347;
+  --tile-2: #ff5f6d;
+}
+
+/* Three tiles: three across on wide screens, one column on phones */
+.category-tiles {
+  max-width: 1020px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .category-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 780px; }
+  .tile-gents { grid-column: 1 / -1; }
+}
+
+@media (max-width: 600px) {
+  .category-tiles { grid-template-columns: 1fr; }
+  .tile-gents { grid-column: auto; }
+}

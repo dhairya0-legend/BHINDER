@@ -38,11 +38,31 @@ const openingLines = {
   Zara: "Hey you, welcome in. Before we start, are you a guy or a girl?",
   Red: "Finally, someone to roast. First, guy or girl? I need to know who I'm destroying.",
   Rosie: "Oyeee finally! Kahan marr gaya tha? Pehle bata, tu guy hai ya girl?",
-  Sia: "Rule 1: answer fast. Are you a guy or a girl? Rule 2 doesn't exist yet!"
+  Sia: "Rule 1: answer fast. Are you a guy or a girl? Rule 2 doesn't exist yet!",
+  Kabir: "Well, well... look who just walked in. I'm Kabir, and I'm already impressed. Tell me first, are you a girl or a guy?",
+  Neel: "Oh... hi. Um, hey. I'm Neel. Sorry, I'm a little nervous. Are you a girl or a guy? Just so I know how to talk to you."
 };
 
-// Categories that need the "crazy zone" warning before chatting
-const warnedCategories = ['crazy-divas'];
+// Categories that show a warning (and the guy-or-girl picker) before chatting
+const warningCopy = {
+  'crazy-divas': {
+    title: 'CRAZY ZONE \u00B7 18+',
+    text:
+      "Expect strong language, brutal roasting, wild flirting and zero mercy from Red, Rosie and Sia. " +
+      "Zara is the sweet one. It's all pretend, so don't take it personally. Not for the easily offended."
+  },
+  'gentlemen': {
+    title: 'GENTLEMEN \u00B7 18+',
+    text:
+      "Kabir and Neel are charming, flirty gentlemen made for the girls. They may swear back if you do. " +
+      "Everyone here is a fictional AI character and it's all just for fun. Not for the easily offended."
+  }
+};
+
+const warnedCategories = Object.keys(warningCopy);
+
+// Which warnings this visitor has already accepted
+const warnedSeen = new Set();
 
 
 // =========================
@@ -189,11 +209,19 @@ function showGenderPicker() {
 
   row.className = 'gender-picker';
 
-  [
-    ['male', "I'm a guy"],
-    ['female', "I'm a girl"],
-    ['other', 'Rather not say']
-  ].forEach(([value, label]) => {
+  const guy = ['male', "I'm a guy"];
+
+  const girl = ['female', "I'm a girl"];
+
+  const other = ['other', 'Rather not say'];
+
+  // The gentlemen were made for the girls, so "girl" comes first
+  const options =
+    currentCharacterCategory === 'gentlemen'
+      ? [girl, guy, other]
+      : [guy, girl, other];
+
+  options.forEach(([value, label]) => {
 
     const button =
       document.createElement('button');
@@ -225,7 +253,7 @@ function showGenderPicker() {
 }
 
 
-let crazyWarned = false;
+let currentCharacterCategory = '';
 
 let pendingCard = null;
 
@@ -236,10 +264,16 @@ function startChat(card) {
 
   if (
     warnedCategories.includes(card.dataset.category) &&
-    !crazyWarned
+    !warnedSeen.has(card.dataset.category)
   ) {
 
     pendingCard = card;
+
+    const copy = warningCopy[card.dataset.category];
+
+    document.getElementById('crazyWarningTitle').textContent = copy.title;
+
+    document.getElementById('crazyWarningText').textContent = copy.text;
 
     crazyWarning.hidden = false;
 
@@ -255,7 +289,7 @@ document
   .getElementById('crazyAccept')
   .addEventListener('click', () => {
 
-    crazyWarned = true;
+    if (pendingCard) warnedSeen.add(pendingCard.dataset.category);
 
     crazyWarning.hidden = true;
 
@@ -374,6 +408,8 @@ function beginChat(card) {
     lastExchange = null;
 
     currentImage = image;
+
+    currentCharacterCategory = card.dataset.category;
 
     messageInput.disabled = false;
 
@@ -751,7 +787,8 @@ document
 
 const categories = [
   { id: 'anime-fangurls', name: 'Anime Fangurls', emoji: '🌸' },
-  { id: 'crazy-divas', name: '4 Crazy Divas', emoji: '🔥' }
+  { id: 'crazy-divas', name: '4 Crazy Divas', emoji: '🔥' },
+  { id: 'gentlemen', name: '2 Gentlemen', emoji: '🎩' }
 ];
 
 let currentCategory = categories[0].id;
@@ -1713,7 +1750,13 @@ async function renderShareCard() {
 
   ctx.font = '800 44px ' + font;
 
-  ctx.fillText('Get roasted too \uD83D\uDD25', cx, 1236);
+  ctx.fillText(
+    currentCharacterCategory === 'gentlemen'
+      ? 'Meet your gentleman \uD83C\uDFA9'
+      : 'Get roasted too \uD83D\uDD25',
+    cx,
+    1236
+  );
 
   ctx.fillStyle = 'rgba(255,255,255,0.6)';
 
@@ -1779,7 +1822,10 @@ document
 
     const name = lastExchange ? lastExchange.name : 'A diva';
 
-    const text = name + ' just roasted me on BHINDER \uD83D\uDD25 Try it yourself:';
+    const text =
+      currentCharacterCategory === 'gentlemen'
+        ? name + ' just made my day on BHINDER \uD83C\uDFA9 Meet him too:'
+        : name + ' just roasted me on BHINDER \uD83D\uDD25 Try it yourself:';
 
     const blob = await cardBlob();
 
