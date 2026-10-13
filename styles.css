@@ -3075,3 +3075,12 @@ body {
 
 /* A second or third short text from the same character: no repeated name label */
 .message.follow .message-label { display: none; }
+
+/* Debug view (open the site with ?debug): shows which model answered */
+.model-tag {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  opacity: 0.55;
+  font-family: ui-monospace, monospace;
+}

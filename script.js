@@ -29,6 +29,9 @@ let currentImage = '';
 
 const SITE_URL = 'https://dhairya0-legend.github.io/BHINDER/';
 
+// Open the site with ?debug at the end of the link to see which AI model answered each reply
+const DEBUG_MODEL = /[?&]debug\b/.test(location.search);
+
 // Opening line for each character
 const openingLines = {
   Mika: "Hm. You showed up. Try not to say anything silly in the first minute.",
@@ -634,6 +637,8 @@ async function sendMessage(text) {
         typing.remove();
 
 
+        const modelUsed = response.headers.get('X-Model-Used');
+
         // Create empty bot message
 
         botMessage = addMessage('', 'bot');
@@ -687,6 +692,18 @@ async function sendMessage(text) {
         fullReply = fullReply.replace(/\*/g, '');
 
         paintReply(bubbles, fullReply);
+
+        if (DEBUG_MODEL && modelUsed) {
+
+          const tag = document.createElement('small');
+
+          tag.className = 'model-tag';
+
+          tag.textContent = 'model: ' + modelUsed;
+
+          bubbles[bubbles.length - 1].bubble.appendChild(tag);
+
+        }
 
 
         if (!fullReply.trim()) {
